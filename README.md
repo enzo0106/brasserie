@@ -21,7 +21,7 @@ Projet de site web développé dans le cadre d'un projet d'équipe. Il s'agit d'
 
 ---
 
-## 🛠 Technologies utilisées
+##  Technologies utilisées
 
 - HTML / CSS / JavaScript
 - PHP
@@ -59,7 +59,7 @@ Le projet a été structuré en 5 sprints pour assurer une progression agile et 
 - Profil caissier
 - Correction de bugs
 
-### 🛠️ Sprint 5 : finalisation des profils
+###  Sprint 5 : finalisation des profils
 - Page commande
 - Compte client
 - Profil client
