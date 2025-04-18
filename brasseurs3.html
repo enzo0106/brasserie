@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Stocks - Matières Premières</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0e1b3;
+            color: #4e4e4e;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #c88d4a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff8e0;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #c88d4a;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        button {
+            background-color: #c88d4a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #9b6834;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1em;
+            color: #4e4e4e;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gestion des Stocks de Matières Premières</h1>
+    </header>
+
+    <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ingrédient</th>
+                    <th>Quantité</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="stock-list">
+                <!-- Stock items will be listed here -->
+            </tbody>
+        </table>
+
+        <button onclick="addStock()">Ajouter un ingrédient</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Brasserie Artisanale</p>
+    </footer>
+
+    <script>
+        const stock = [];
+
+        function updateStockList() {
+            const stockList = document.getElementById('stock-list');
+            stockList.innerHTML = "";
+            stock.forEach((item, index) => {
+                stockList.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td><button onclick="removeStock(${index})">Supprimer</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addStock() {
+            const name = prompt("Nom de l'ingrédient");
+            const quantity = prompt("Quantité");
+            if (name && quantity) {
+                stock.push({ name, quantity });
+                updateStockList();
+            }
+        }
+
+        function removeStock(index) {
+            stock.splice(index, 1);
+            updateStockList();
+        }
+    </script>
+</body>
+</html>

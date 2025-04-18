@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panneau d'administration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5dc; 
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #fffaf0; 
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            text-align: center;
+            color: #5c4033; 
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px 5px;
+            background-color: #deb887; 
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #d2b48c;
+        }
+        .btn-create {
+            display: block;
+            width: 200px;
+            margin: 0 auto 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f5deb3;
+        }
+        tr:hover {
+            background-color: #f0e4d7;
+        }
+        .actions button {
+            margin-right: 5px;
+        }
+        .role-btn {
+            padding: 8px 15px;
+            background-color: #8b7765;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 150px; 
+            text-align: center;
+        }
+        .role-btn:hover {
+            background-color: #a19080;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #8b7765;
+            font-size: 0.9em;
+        }
+    </style>
+    <script>
+        function changeRole(button) {
+            const roles = ['Client', 'Brasseur', 'Personnel', 'Administrateur'];
+            let currentRole = button.innerText;
+            let nextRoleIndex = (roles.indexOf(currentRole) + 1) % roles.length;
+            button.innerText = roles[nextRoleIndex];
+            // Ici, tu peux ajouter un appel AJAX pour enregistrer le changement côté serveur
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Panneau d'administration</h1>
+        <button class="btn btn-create">Créer un compte</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td>1</td>
+                    <td>jimmy johns</td>
+                    <td><button class="role-btn" onclick="changeRole(this)">Client</button></td>
+                    <td class="actions">
+                        <button class="btn">Modifier</button>
+                        <button class="btn">Supprimer</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>jean dujardin</td>
+                    <td><button class="role-btn" onclick="changeRole(this)">Brasseur</button></td>
+                    <td class="actions">
+                        <button class="btn">Modifier</button>
+                        <button class="btn">Supprimer</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <footer>
+            &copy; 2025 - Gestion des utilisateurs - 
+        </footer>
+    </div>
+</body>
+</html>
+

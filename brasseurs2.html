@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils de Brassage</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0e1b3;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #c88d4a;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #c88d4a;
+            padding-bottom: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #f0e1b3;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #c88d4a;
+            color: white;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+    <script>
+        function calculerBrassage() {
+            let volumeBiere = parseFloat(document.getElementById('volume').value);
+            let degreAlcool = parseFloat(document.getElementById('degre').value);
+            let ebcMalt = parseFloat(document.getElementById('ebcMalt').value);
+            
+            if (isNaN(volumeBiere) || isNaN(degreAlcool) || isNaN(ebcMalt)) {
+                alert('Veuillez entrer des valeurs valides.');
+                return;
+            }
+            
+            let malt = (volumeBiere * degreAlcool) / 20;
+            let eauBrassage = malt * 2.8;
+            let eauRincage = (volumeBiere * 1.25) - (eauBrassage * 0.7);
+            
+            let mcu = (4.23 * (ebcMalt * malt)) / volumeBiere;
+            let ebc = 2.9396 * Math.pow(mcu, 0.6859);
+            let srm = 0.508 * ebc;
+            
+            
+            let houblonAmerisant = volumeBiere * 3;
+            let houblonAromatique = volumeBiere * 1;
+            let levure = volumeBiere / 2;
+            
+            document.getElementById('resultats').innerHTML = `
+                <p><strong>Malt nécessaire :</strong> ${malt.toFixed(2)} kg</p>
+                <p><strong>Eau de brassage :</strong> ${eauBrassage.toFixed(2)} L</p>
+                <p><strong>Eau de rinçage :</strong> ${eauRincage.toFixed(2)} L</p>
+                <p><strong>Houblon amérisant :</strong> ${houblonAmerisant.toFixed(2)} g</p>
+                <p><strong>Houblon aromatique :</strong> ${houblonAromatique.toFixed(2)} g</p>
+                <p><strong>Levure :</strong> ${levure.toFixed(2)} g</p><br>
+                <p><strong>MCU :</strong> ${mcu.toFixed(2)}</p>
+                <p><strong>EBC :</strong> ${ebc.toFixed(2)}</p>
+                <p><strong>SRM :</strong> ${srm.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Interface Brasseurs</h1>
+    </header>
+    
+    <main>
+        <section id="outil-brassage">
+            <h2>Outil de Brassage</h2>
+            <form onsubmit="event.preventDefault(); calculerBrassage();">
+                <label for="volume">Volume de bière (L) :</label>
+                <input type="number" id="volume" name="volume" step="0.1">
+                
+                <label for="degre">Degré d’alcool (%) :</label>
+                <input type="number" id="degre" name="degre" step="0.1">
+                
+                <label for="ebcMalt">EBC du malt :</label>
+                <input type="number" id="ebcMalt" name="ebcMalt" step="0.1">
+                
+                <button type="submit">Calculer</button>
+            </form>
+            <div id="resultats">
+                <!-- Espace réservé pour les résultats des calculs -->
+            </div>
+        </section>
+    </main>
+</body>
+</html>
